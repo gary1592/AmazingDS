@@ -1,9 +1,9 @@
 package binaryTree;
 
 public class TreeNode {
-	TreeNode left;
-	TreeNode right;
-	int val;
+	public TreeNode left;
+	public TreeNode right;
+	public int val;
 
 	public TreeNode() {
 

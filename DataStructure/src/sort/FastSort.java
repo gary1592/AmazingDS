@@ -4,6 +4,14 @@ import org.junit.Test;
 
 public class FastSort {
 
+	/**
+	 * 划分函数 O(log(n))
+	 * 
+	 * @param array
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	public int position(int[] array, int left, int right) {
 		int i = left, j = right + 1;
 		int pivot = array[left];
@@ -28,6 +36,13 @@ public class FastSort {
 		array[j] = temp;
 	}
 
+	/**
+	 * 快速排序 O(log(n))
+	 * 
+	 * @param array
+	 * @param left
+	 * @param right
+	 */
 	public void quickSort(int[] array, int left, int right) {
 		int k;
 		if (left < right) {
@@ -37,6 +52,11 @@ public class FastSort {
 		}
 	}
 
+	/**
+	 * 以第一个元素为主元
+	 * 
+	 * @param array
+	 */
 	public void startSort(int[] array) {
 		quickSort(array, 0, array.length - 1);
 	}
@@ -45,6 +65,8 @@ public class FastSort {
 	public void test() {
 		int[] array = { 0, 21, 32, 4, 1, 2, 23, 546 };
 		startSort(array);
+
+		System.out.println("快速排序：");
 		for (int a : array) {
 			System.out.println(a);
 		}

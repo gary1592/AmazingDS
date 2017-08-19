@@ -2,8 +2,8 @@ package heap;
 
 public class Heap {
 
-	int size = 0;
-	int[] elements;
+	public int size = 0;
+	public int[] elements;
 
 	public Heap() {
 
@@ -20,11 +20,17 @@ public class Heap {
 	public void createHeap() {
 		// 从中间节点开始，直至0节点
 		for (int i = (size - 1) / 2; i >= 0; i--) {
-			adjustDown(i);
+			adjustDown(i, size);
 		}
 	}
 
-	public void adjustDown(int start) {
+	/**
+	 * 向下调整 O(log(n))
+	 * 
+	 * @param start
+	 * @param size
+	 */
+	public void adjustDown(int start, int size) {
 		int n = size;
 		int child = 2 * start + 1;
 		int temp = elements[start];

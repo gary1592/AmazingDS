@@ -29,7 +29,7 @@ public class PriorityQueue {
 	}
 
 	/**
-	 * 尾部插入之后向上调整
+	 * 尾部插入之后向上调整 O(log(n))
 	 * 
 	 * @param size
 	 */
@@ -45,7 +45,7 @@ public class PriorityQueue {
 	}
 
 	/**
-	 * 删除之后向下调整
+	 * 删除之后向下调整 O(log(n))
 	 * 
 	 * @param start
 	 * @param size

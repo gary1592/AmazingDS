@@ -2,7 +2,30 @@ package sort;
 
 import org.junit.Test;
 
-public class FastSort {
+public class ExchangeSort {
+
+	/**
+	 * 冒泡排序 O(n^2)
+	 * 
+	 * @param array
+	 */
+	public void bubbleSort(int[] array) {
+		int i, j, last, temp;
+		// 外循环定义序列末位置
+		for (i = array.length - 1; i > 0;) {
+			last = 0;
+			// 内循环从头至末交换比较
+			for (j = 0; j < i; j++) {
+				if (array[j] > array[j + 1]) {
+					temp = array[j];
+					array[j] = array[j + 1];
+					array[j + 1] = temp;
+					last = j;// 记录最后一次交换的位置
+				}
+			}
+			i = last;
+		}
+	}
 
 	/**
 	 * 划分函数 O(log(n))
@@ -57,18 +80,28 @@ public class FastSort {
 	 * 
 	 * @param array
 	 */
-	public void startSort(int[] array) {
+	public void quickSortStart(int[] array) {
 		quickSort(array, 0, array.length - 1);
 	}
 
 	@Test
 	public void test() {
+		int[] list = { 9, 23, 232, 134, 92, 234 };
+		bubbleSort(list);
+
+		System.out.println("冒泡排序：");
+		for (int a : list) {
+			System.out.print(a + " ");
+		}
+		System.out.println();
+
 		int[] array = { 0, 21, 32, 4, 1, 2, 23, 546 };
-		startSort(array);
+		quickSortStart(array);
 
 		System.out.println("快速排序：");
 		for (int a : array) {
-			System.out.println(a);
+			System.out.print(a + " ");
 		}
+
 	}
 }

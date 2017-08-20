@@ -5,13 +5,17 @@ public class UFset {
 	int[] parent;
 	int size;
 
+	public UFset() {
+
+	}
+
 	public UFset(int maxSize) {
 		parent = new int[maxSize];
 	}
-	
-	public void createUFset(int n){
+
+	public void createUFset(int n) {
 		size = n;
-		for(int i = 0;i<n;i++)
+		for (int i = 0; i < n; i++)
 			parent[i] = -1;
 	}
 

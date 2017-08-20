@@ -7,64 +7,61 @@ import org.junit.Test;
 
 public class BinaryTreeTest {
 
+	BinaryTreeUtils btUtils = new BinaryTreeUtils();
+
 	@Test
 	public void test() {
+		TreeNode n1 = new TreeNode(10);
+		TreeNode n2 = new TreeNode(20);
+		TreeNode n3 = new TreeNode(30);
+		TreeNode n4 = new TreeNode(40);
+		TreeNode n5 = new TreeNode(50);
+		TreeNode n6 = new TreeNode(60);
+		TreeNode n7 = new TreeNode(70);
 
-		BinaryTreeUtils btService = new BinaryTreeUtils();
-		BinaryTree bt1 = new BinaryTree();
-		BinaryTree bt2 = new BinaryTree();
-		BinaryTree bt3 = new BinaryTree();
-		BinaryTree bt4 = new BinaryTree();
-		BinaryTree bt5 = new BinaryTree();
-		BinaryTree bt6 = new BinaryTree();
-		BinaryTree bt7 = new BinaryTree();
+		btUtils.insertNode(n3, n1, n2);
+		btUtils.insertNode(n6, n4, n5);
+		btUtils.insertNode(n7, n3, n6);
 
-		btService.insertNode(bt1, 10, bt1, bt1);
-		btService.insertNode(bt2, 20, bt2, bt2);
-		btService.insertNode(bt3, 30, bt1, bt2);
-
-		btService.insertNode(bt4, 40, bt4, bt4);
-		btService.insertNode(bt5, 50, bt5, bt5);
-		btService.insertNode(bt6, 60, bt4, bt5);
-
-		btService.insertNode(bt7, 70, bt3, bt6);
+		BinaryTree bt = new BinaryTree(n7);
 
 		System.out.println("先序遍历（中－左－右）：");
-		btService.preOrder(bt7.root);
+		btUtils.preOrder(bt.root);
 		System.out.println();
 
 		System.out.println("非递归先序遍历：");
-		btService.iPreOrder(bt7.root);
+		btUtils.iPreOrder(bt.root);
 		System.out.println();
 
 		System.out.println("中序遍历（左－中－右）：");
-		btService.midOrder(bt7.root);
+		btUtils.midOrder(bt.root);
 		System.out.println();
 
 		System.out.println("非递归中序遍历：");
-		btService.iMidOrder(bt7.root);
+		btUtils.iMidOrder(bt.root);
 		System.out.println();
 
 		System.out.println("后序遍历（左－右－中）：");
-		btService.postOrder(bt7.root);
+		btUtils.postOrder(bt.root);
 		System.out.println();
 
 		System.out.println("非递归后序遍历：");
-		btService.iPostOrder(bt7.root);
+		btUtils.iPostOrder(bt.root);
 		System.out.println();
 
 		System.out.println("层次遍历：");
-		btService.levelOrder(bt7.root);
+		btUtils.levelOrder(bt.root);
 		System.out.println();
 
 		System.out.println("所有路径：");
 		List<String> list = new ArrayList<>();
-		btService.binaryTreePaths(bt7.root, list);
+		btUtils.binaryTreePaths(bt.root, list);
 		System.out.println(list);
 
 		System.out.println("最大节点：");
-		int max = btService.maxNode(bt7.root).val;
+		int max = btUtils.maxNode(bt.root).val;
 		System.out.println(max);
 		System.out.println();
 	}
+
 }

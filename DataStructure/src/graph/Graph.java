@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import ufset.UFset;
+
 public class Graph {
 
 	int nodeNum, initNum = 0, edgeNum;

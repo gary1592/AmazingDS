@@ -14,13 +14,11 @@ public class BinaryTreeUtils {
 	 * @param val
 	 * @param left
 	 * @param right
+	 * @return
 	 */
-	public void insertNode(BinaryTree bt, int val, BinaryTree left, BinaryTree right) {
-		TreeNode tn = new TreeNode();
-		tn.val = val;
-		tn.left = left.root;
-		tn.right = right.root;
-		bt.root = tn;
+	public void insertNode(TreeNode root, TreeNode left, TreeNode right) {
+		root.left = left;
+		root.right = right;
 	}
 
 	/**
@@ -47,6 +45,7 @@ public class BinaryTreeUtils {
 	 */
 	public void visit(TreeNode tn) {
 		System.out.print(tn.val + " ");
+		// System.out.println(tn.lc + "," + tn.rc);
 	}
 
 	/**

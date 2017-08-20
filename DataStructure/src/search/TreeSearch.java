@@ -9,7 +9,7 @@ import binaryTree.TreeNode;
 public class TreeSearch {
 
 	/**
-	 * 插入一个节点 O(log(n))
+	 * 插入节点 O(log(n))
 	 * 
 	 * @param bt
 	 * @param x
@@ -126,7 +126,6 @@ public class TreeSearch {
 		insert(bt, 43);
 
 		delete(bt, 28);
-		// System.out.println(binaryTreeSearch(bt, 43));
 
 		BinaryTreeUtils btUtils = new BinaryTreeUtils();
 		btUtils.midOrder(bt.root);

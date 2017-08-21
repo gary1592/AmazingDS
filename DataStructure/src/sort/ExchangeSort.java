@@ -60,7 +60,7 @@ public class ExchangeSort {
 	}
 
 	/**
-	 * 快速排序 O(log(n))
+	 * 快速排序 O(n*log(n))
 	 * 
 	 * @param array
 	 * @param left

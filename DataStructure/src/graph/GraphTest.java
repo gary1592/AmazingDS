@@ -162,4 +162,61 @@ public class GraphTest {
 		Graph g = new Graph();
 		g.Kruskal(queue, 6);
 	}
+
+	@Test
+	public void testDijkstra() {
+		int MAX = 65535;
+		int[][] matrix = { { 0, 50, 10, MAX, 70, MAX }, { MAX, 0, 15, MAX, 10, MAX }, { 20, MAX, 0, 15, MAX, MAX },
+				{ MAX, 20, MAX, 0, 35, MAX }, { MAX, MAX, MAX, 30, 0, MAX }, { MAX, MAX, MAX, 3, MAX, 0 } };
+		int n = 6;
+
+		System.out.println("邻接矩阵：");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		Graph graph = new Graph(matrix, 6);
+		int[] d = new int[n];
+		int[] path = new int[n];
+		int[] result = new int[n];
+		graph.Dijkstra(0, d, path, result);
+
+		System.out.println("单源最短路径：");
+		for (int a : d) {
+			System.out.print(a + " ");
+		}
+	}
+
+	@Test
+	public void testFloyed() {
+		int MAX = 65535;
+		int[][] matrix = { { 0, 1, MAX, 4 }, { MAX, 0, 9, 2 }, { 3, 5, 0, 8 }, { MAX, MAX, 6, 0 } };
+		int n = 4;
+		int e = 8;
+
+		System.out.println("邻接矩阵：");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		Graph graph = new Graph(matrix, n, e);
+		int[][] d = new int[n][n];
+		int[][] path = new int[n][n];
+		int[][] result = new int[n][n];
+		graph.Floyd(d, path, result);
+
+		System.out.println("多源最短路径：");
+		for (int x = 0; x < n; x++) {
+			for (int y = 0; y < n; y++) {
+				System.out.print(d[x][y] + " ");
+			}
+			System.out.println();
+		}
+	}
 }

@@ -17,12 +17,24 @@ public class Graph {
 	boolean[] mark;// 节点是否选入生成树
 	int[] inDegree;// 入度
 	int[] a;// 边的权值
+	int[][] matrix;// 邻接矩阵
 
 	List<Integer> dfslist = new ArrayList<>();
 	List<Integer> bfslist = new ArrayList<>();
 
 	public Graph() {
 
+	}
+
+	public Graph(int[][] matrix, int nodeNum) {
+		this.matrix = matrix;
+		this.nodeNum = nodeNum;
+	}
+
+	public Graph(int[][] matrix, int nodeNum, int edgeNum) {
+		this.matrix = matrix;
+		this.nodeNum = nodeNum;
+		this.edgeNum = edgeNum;
 	}
 
 	/**
@@ -453,5 +465,119 @@ public class Graph {
 		}
 		if (k < n - 2)
 			System.out.println("This graph is not connected!");
+	}
+
+	/**
+	 * 迪杰斯特拉算法（单源最短路径）O(n^2)
+	 * 
+	 * @param s
+	 * @param d：记录源点s到节点i的最短路径的长度
+	 * @param path：记录源点s到节点i的最短路径上，节点i的前一个节点
+	 * 
+	 *            若起始点为v0，选择与其直连的边权值最小的点v2，将v2加入生成树；
+	 *            生成树上有了v2之后，更新v0到其它点的距离，之后都是此类做法。
+	 */
+	public void Dijkstra(int s, int[] d, int[] path, int[] result) {
+		int MAX = 65535;
+		result[0] = s;
+		int i, k, j;
+		boolean[] inside = new boolean[nodeNum];
+		// 初始化
+		for (i = 0; i < nodeNum; i++) {
+			inside[i] = false;
+			d[i] = matrix[s][i];
+			if (i != s && d[i] < MAX)
+				path[i] = s;
+			else
+				path[i] = -1;
+		}
+		System.out.println("d[]初始值：");
+		for (int w = 0; w < nodeNum; w++) {
+			System.out.print(d[w] + " ");
+		}
+		System.out.println();
+
+		// "圈地运动"
+		inside[s] = true;
+		d[s] = 0;
+		for (i = 1; i < nodeNum; i++) {
+			k = choose(d, inside);
+			inside[k] = true;
+			result[i] = k;
+			// 每加入一个点，更新所有的d[]和path[]
+			for (j = 0; j < nodeNum; j++) {
+				if (!inside[j] && d[k] + matrix[k][j] < d[j]) {
+					d[j] = d[k] + matrix[k][j];
+					path[j] = k;
+				}
+			}
+
+			System.out.println("加入最近顶点" + k + "后的最短距离：");
+			for (int w = 0; w < nodeNum; w++) {
+				System.out.print(d[w] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	/**
+	 * 选择下一条最短路径的节点 O(n)
+	 * 
+	 * @param d
+	 * @param ins
+	 * @return
+	 */
+	public int choose(int[] d, boolean[] ins) {
+		int min = Integer.MAX_VALUE, pos = -1;
+		for (int i = 1; i < d.length; i++) {
+			if (d[i] < min && !ins[i]) {
+				min = d[i];
+				pos = i;
+			}
+		}
+		return pos;
+	}
+
+	/**
+	 * 弗洛伊德算法 O(n^3)
+	 * 
+	 * @param d
+	 * @param path
+	 * @param result
+	 * 
+	 *            两点之间的最短距离，分别在加入每一个点之后，更新最短距离
+	 */
+	public void Floyd(int[][] d, int[][] path, int[][] result) {
+		int i, j, k;
+		for (i = 0; i < nodeNum; i++) {
+			for (j = 0; j < nodeNum; j++) {
+				d[i][j] = matrix[i][j];
+				if (i != j && d[i][j] < edgeNum)
+					path[i][j] = i;
+				else
+					path[i][j] = -1;
+
+			}
+		}
+
+		for (k = 0; k < nodeNum; k++) {
+			for (i = 0; i < nodeNum; i++) {
+				for (j = 0; j < nodeNum; j++) {
+					// 加入顶点k，更新d[i][j]和path[i][j]
+					if (d[i][k] + d[k][j] < d[i][j]) {
+						d[i][j] = d[i][k] + d[k][j];
+						path[i][j] = path[k][j];
+					}
+				}
+			}
+
+			System.out.println("加入顶点" + k + "后的所有最短路径：");
+			for (int x = 0; x < nodeNum; x++) {
+				for (int y = 0; y < nodeNum; y++) {
+					System.out.print(d[x][y] + " ");
+				}
+				System.out.println();
+			}
+		}
 	}
 }
